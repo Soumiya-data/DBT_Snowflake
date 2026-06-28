@@ -6,10 +6,10 @@ jobs:
     retryOnFailure: false
     steps:
       - name: run models
-        command: dbt run
+        command: dbt run --select stg_transactions daily_revenue
 
       - name: test models
-        command: dbt test
+        command: dbt test --select stg_transactions daily_revenue
 
   - name: nightly
     targetName: dev
@@ -23,11 +23,11 @@ jobs:
     schedule: 30 7 * * 1-5
     steps:
       - name: run models
-        command: dbt run
+        command: dbt run --select stg_transactions daily_revenue
 
   - name: every30minutes
     targetName: dev
     schedule: '*/30 * * * *'
     steps:
       - name: run models
-        command: dbt run  
+        command: dbt run --select stg_transactions daily_revenue
